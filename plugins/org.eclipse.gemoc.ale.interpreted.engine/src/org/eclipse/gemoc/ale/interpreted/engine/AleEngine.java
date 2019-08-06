@@ -129,6 +129,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<SequentialModel
 				
 				if(res.getDiagnostic().getMessage() != null) {
 					System.out.println(res.getDiagnostic().getMessage());
+					throw new RuntimeException(res.getDiagnostic().getMessage());
 				}
 			}
 			else {
@@ -137,6 +138,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<SequentialModel
 				
 				if(res.getDiagnostic().getMessage() != null) {
 					System.out.println(res.getDiagnostic().getMessage());
+					throw new RuntimeException(res.getDiagnostic().getMessage());
 				}
 			}
 			
@@ -157,6 +159,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<SequentialModel
 			
 			if(res.getDiagnostic().getMessage() != null) {
 				System.out.println(res.getDiagnostic().getMessage());
+				throw new RuntimeException(res.getDiagnostic().getMessage());
 			}
 		}
 	}
