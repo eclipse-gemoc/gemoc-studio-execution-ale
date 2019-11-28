@@ -45,11 +45,7 @@
             <layout>p2</layout>
             <url>${melange-repo.url}</url>
         </repository>
-        <repository> <!-- this repo is used to provide jdom and jaxen plugins -->
-            <id>app4mc</id>
-            <layout>p2</layout>
-            <url>http://download.eclipse.org/app4mc/updatesites/releases/0.8.1/</url>
-        </repository>
+
 		<!-- not required because the build is supposed to be launched from gemoc-studio/dev_support/full_compilation/pom.xml
 		may be put in a maven profile if require ?
 		<repository>
