@@ -263,7 +263,7 @@ public class LaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				for(ILaunchLanguageSelectionListener listener : _languageSelectionListeners) {
-					listener.languageChanged();
+					listener.languageChanged(_languageCombo.getText());
 				}
 				updateLaunchConfigurationDialog();
 			}
@@ -479,22 +479,23 @@ public class LaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 				org.eclipse.gemoc.dsl.Dsl language = DslHelper.load(_languageCombo.getText());
 
 				Dsl environment = Helper.gemocDslToAleDsl(language);
-				ALEInterpreter interpreter = new ALEInterpreter();
-				Optional<Method> initOperation = Optional.empty();
-				try {
-					List<ParseResult<ModelUnit>> parsedSemantics = (new DslBuilder(interpreter.getQueryEnvironment()))
-							.parse(environment);
-					initOperation = parsedSemantics.stream().filter(sem -> sem.getRoot() != null)
-							.map(sem -> sem.getRoot()).flatMap(unit -> unit.getClassExtensions().stream())
-							.filter(xtdCls -> xtdCls.getBaseClass().getName().equals(tagetClassName))
-							.flatMap(xtdCls -> xtdCls.getMethods().stream()).filter(op -> op.getTags().contains("init"))
-							.findFirst();
-				} catch (Exception e) {
-					Activator.error(e.getMessage(), e);
-				}
-
-				if (initOperation.isPresent()) {
-					return (new MethodLabelProvider()).getText(initOperation.get());
+				try(ALEInterpreter interpreter = new ALEInterpreter()) {
+					Optional<Method> initOperation = Optional.empty();
+					try {
+						List<ParseResult<ModelUnit>> parsedSemantics = (new DslBuilder(interpreter.getQueryEnvironment()))
+								.parse(environment);
+						initOperation = parsedSemantics.stream().filter(sem -> sem.getRoot() != null)
+								.map(sem -> sem.getRoot()).flatMap(unit -> unit.getClassExtensions().stream())
+								.filter(xtdCls -> xtdCls.getBaseClass().getName().equals(tagetClassName))
+								.flatMap(xtdCls -> xtdCls.getMethods().stream()).filter(op -> op.getTags().contains("init"))
+								.findFirst();
+					} catch (Exception e) {
+						Activator.error(e.getMessage(), e);
+					}
+	
+					if (initOperation.isPresent()) {
+						return (new MethodLabelProvider()).getText(initOperation.get());
+					}
 				}
 			}
 		}
