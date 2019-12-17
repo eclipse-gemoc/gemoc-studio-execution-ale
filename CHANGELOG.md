@@ -1,5 +1,22 @@
 # Changelog
 
+## v3.2.0-20191216 (16/12/2019)
+
+#### Enhancements:
+
+- [**enhancement**] Clarifies Eclipse consoles used by the engines [#20](https://github.com/eclipse/gemoc-studio-execution-ale/pull/20)
+
+#### Bug Fixes:
+
+- [**bug**][**bump**] Use AleInterpreter close [#24](https://github.com/eclipse/gemoc-studio-execution-ale/pull/24)
+- [**bug**][**bump**] Stop engine on error [#21](https://github.com/eclipse/gemoc-studio-execution-ale/pull/21)
+
+#### Release Engineering
+
+- [**releng**] Tycho 1.5 and p2 dependencies optimisation [#26](https://github.com/eclipse/gemoc-studio-execution-ale/pull/26)
+
+---
+
 ## v3.1.0 (29/07/2019)
 *No changelog for this release.*
 
