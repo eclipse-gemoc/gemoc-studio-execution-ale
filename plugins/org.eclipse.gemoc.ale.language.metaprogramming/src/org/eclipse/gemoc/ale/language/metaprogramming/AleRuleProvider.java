@@ -1,4 +1,4 @@
-package metaprogramming.aleapproach;
+package org.eclipse.gemoc.ale.language.metaprogramming;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,8 +6,6 @@ import java.util.Collection;
 import org.eclipse.gemoc.xdsmlframework.api.extensions.metaprog.IRule;
 import org.eclipse.gemoc.xdsmlframework.api.extensions.metaprog.IRuleProvider;
 import org.eclipse.gemoc.xdsmlframework.api.extensions.metaprog.EcoreRule;
-
-import rules.AleRule;
 /**
  * RuleProvider used for the Ale meta-programming approach.
  * Uses the Ecore RuleProvider

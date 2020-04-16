@@ -1,4 +1,4 @@
-package rules;
+package org.eclipse.gemoc.ale.language.metaprogramming;
 
 import java.util.ArrayList;
 import java.util.List;
