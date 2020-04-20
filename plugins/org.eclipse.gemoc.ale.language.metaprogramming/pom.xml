@@ -6,7 +6,7 @@
 
    <parent>
        <groupId>org.eclipse.gemoc.ale.interpreted.engine</groupId>
-       <artifactId>org.eclipse.gemoc.ale.nterpreted.engine.plugins</artifactId>
+       <artifactId>org.eclipse.gemoc.ale.interpreted.engine.plugins</artifactId>
        <version>1.0.1-SNAPSHOT</version>
    </parent>
 
