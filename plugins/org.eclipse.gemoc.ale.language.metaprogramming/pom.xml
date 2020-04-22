@@ -12,6 +12,6 @@
 	</parent>
 
 	<artifactId>org.eclipse.gemoc.ale.language.metaprogramming</artifactId>
-	<packaging>eclipse-feature</packaging>
+	<packaging>eclipse-plugin</packaging>
 </project>
 
