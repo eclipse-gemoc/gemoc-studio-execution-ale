@@ -86,7 +86,7 @@ public class AleRule implements IRule{
 				}
 				
 				if(!tagNames.contains("init")) {
-					return (new Message("The Ale file does not contain an \"@init\" operation", Severity.ERROR));
+					return (new Message("The Ale file does not contain an \"@init\" operation", Severity.WARNING));
 				}
 				
 				if(!tagNames.contains("main")) {
