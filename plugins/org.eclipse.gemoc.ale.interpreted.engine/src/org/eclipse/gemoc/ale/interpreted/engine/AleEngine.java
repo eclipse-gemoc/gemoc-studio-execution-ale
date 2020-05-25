@@ -25,11 +25,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.ale.ALEInterpreter;
 import org.eclipse.emf.ecoretools.ale.ALEInterpreter.ClosedALEInterpreterException;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.interpreter.services.EvalBodyService;
 import org.eclipse.emf.ecoretools.ale.core.interpreter.services.ServiceCallListener;
-import org.eclipse.emf.ecoretools.ale.core.parser.Dsl;
 import org.eclipse.emf.ecoretools.ale.core.parser.DslBuilder;
-import org.eclipse.emf.ecoretools.ale.core.parser.visitor.ParseResult;
+import org.eclipse.emf.ecoretools.ale.core.parser.internal.ImmutableDslSemantics;
 import org.eclipse.emf.ecoretools.ale.implementation.Method;
 import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
@@ -41,7 +41,7 @@ import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.gemoc.api.IMultiDimensionalTraceAddon;
 import org.eclipse.gemoc.trace.gemoc.api.ITraceViewListener;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
-import org.eclipse.sirius.common.tools.api.interpreter.IInterpreterWithDiagnostic.IEvaluationResult;
+import org.eclipse.sirius.common.tools.api.interpreter.IEvaluationResult;
 
 import com.google.common.collect.Lists;
 
@@ -55,7 +55,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 	/**
 	 * The semantic from .ale files
 	 */
-	List<ParseResult<ModelUnit>> parsedSemantics;
+	ImmutableDslSemantics parsedSemantics;
 	
 	List<Object> args;
 	
@@ -212,10 +212,10 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 			mainOp = runConf.getExecutionEntryPoint();
 			initOp = runConf.getModelInitializationMethod();
 			
-			Dsl environment = Helper.gemocDslToAleDsl(language);
+			IAleEnvironment environment = Helper.gemocDslToAleDsl(language);
 			interpreter = new ALEInterpreter();
-			parsedSemantics = (new DslBuilder(interpreter.getQueryEnvironment(),
-					caller.eResource().getResourceSet())).parse(environment);
+			parsedSemantics = new ImmutableDslSemantics((new DslBuilder(interpreter.getQueryEnvironment(),
+					caller.eResource().getResourceSet())).parse(environment));
 			
 			/*
 			 * Init interpreter
@@ -250,7 +250,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 	public List<ModelUnit> getModelUnits() {
 		if(parsedSemantics != null) {
 			return 
-				parsedSemantics
+				parsedSemantics.getParsedFiles()
 				.stream()
 				.map(p -> p.getRoot())
 				.filter(elem -> elem != null)

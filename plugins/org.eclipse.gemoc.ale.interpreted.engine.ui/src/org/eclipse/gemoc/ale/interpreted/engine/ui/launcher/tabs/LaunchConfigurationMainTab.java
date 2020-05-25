@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecoretools.ale.ALEInterpreter;
-import org.eclipse.emf.ecoretools.ale.core.parser.Dsl;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.parser.DslBuilder;
 import org.eclipse.emf.ecoretools.ale.core.parser.visitor.ParseResult;
 import org.eclipse.emf.ecoretools.ale.implementation.Method;
@@ -488,7 +488,7 @@ public class LaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 				String tagetClassName = segments.get(segments.size() - 2);
 				org.eclipse.gemoc.dsl.Dsl language = DslHelper.load(_languageCombo.getText());
 
-				Dsl environment = Helper.gemocDslToAleDsl(language);
+				IAleEnvironment environment = Helper.gemocDslToAleDsl(language);
 				try(ALEInterpreter interpreter = new ALEInterpreter()) {
 					Optional<Method> initOperation = Optional.empty();
 					try {

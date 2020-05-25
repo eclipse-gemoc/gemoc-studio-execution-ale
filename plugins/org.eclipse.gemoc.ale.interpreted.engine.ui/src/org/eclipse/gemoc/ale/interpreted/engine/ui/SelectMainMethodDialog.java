@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.ale.ALEInterpreter;
-import org.eclipse.emf.ecoretools.ale.core.parser.Dsl;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.parser.DslBuilder;
 import org.eclipse.emf.ecoretools.ale.core.parser.visitor.ParseResult;
 import org.eclipse.emf.ecoretools.ale.implementation.Method;
@@ -45,7 +45,7 @@ public class SelectMainMethodDialog extends ElementListSelectionDialog {
 		}
 		final EClass finalTarget = target;
 		
-		Dsl environment = Helper.gemocDslToAleDsl(language);
+		IAleEnvironment environment = Helper.gemocDslToAleDsl(language);
 		
 		ALEInterpreter interpreter = new ALEInterpreter();
 		List<ParseResult<ModelUnit>> parsedSemantics = (new DslBuilder(interpreter.getQueryEnvironment())).parse(environment);

@@ -25,9 +25,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecoretools.ale.ALEInterpreter;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.IAleEnvironment;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.impl.RuntimeAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.parser.DslBuilder;
 import org.eclipse.emf.ecoretools.ale.core.parser.visitor.ParseResult;
 import org.eclipse.emf.ecoretools.ale.core.validation.BaseValidator;
+import org.eclipse.emf.ecoretools.ale.ide.Normalized;
 import org.eclipse.emf.ecoretools.ale.implementation.BehavioredClass;
 import org.eclipse.emf.ecoretools.ale.implementation.ExtendedClass;
 import org.eclipse.emf.ecoretools.ale.implementation.Method;
@@ -110,7 +113,7 @@ public class ALEOperationalSemanticsViewGenerator implements OperationalSemantic
 		ALEInterpreter interpreter = new ALEInterpreter();
 		
 		List<ParseResult<ModelUnit>> parsedSemantics = new ArrayList<>();
-		org.eclipse.emf.ecoretools.ale.core.parser.Dsl environment = new org.eclipse.emf.ecoretools.ale.ide.WorkbenchDsl(syntaxes, semantics);
+		IAleEnvironment environment = new Normalized(new RuntimeAleEnvironment(syntaxes, semantics));
 		parsedSemantics = (new DslBuilder(interpreter.getQueryEnvironment(),rs)).parse(environment);
 		
 		List<ModelUnit> res = 
