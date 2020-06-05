@@ -8,9 +8,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecoretools.ale.core.interpreter.IAleEnvironment;
-import org.eclipse.emf.ecoretools.ale.core.interpreter.impl.RuntimeAleEnvironment;
-import org.eclipse.emf.ecoretools.ale.ide.Normalized;
+import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
+import org.eclipse.emf.ecoretools.ale.core.env.impl.PathsBasedAleEnvironment;
+import org.eclipse.emf.ecoretools.ale.ide.env.WithAbsoluteBehaviorPathsAleEnvironment;
 import org.eclipse.gemoc.dsl.Entry;
 
 public class Helper {
@@ -21,11 +21,11 @@ public class Helper {
 		List<String> aleUris = getAleUris(language);
 
 		List<String> ecoreFileUris = ecoreUris.stream()
-				.map(elem -> URI.createFileURI(Normalized.convertToFile(elem)).toString()).collect(Collectors.toList());
+				.map(elem -> URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(elem)).toString()).collect(Collectors.toList());
 
-		Normalized res = new Normalized(new RuntimeAleEnvironment(new ArrayList<String>(), new ArrayList<String>()));
+		WithAbsoluteBehaviorPathsAleEnvironment res = new WithAbsoluteBehaviorPathsAleEnvironment(new PathsBasedAleEnvironment(new ArrayList<String>(), new ArrayList<String>()));
 		try {
-			res = new Normalized(new RuntimeAleEnvironment(ecoreFileUris, aleUris));
+			res = new WithAbsoluteBehaviorPathsAleEnvironment(new PathsBasedAleEnvironment(ecoreFileUris, aleUris));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,7 +44,7 @@ public class Helper {
 		for (String uri : ecoreUris) {
 			boolean isPresent = false;
 			try {
-				isPresent = Files.exists(Paths.get(URI.createFileURI(Normalized.convertToFile(uri)).toString()));
+				isPresent = Files.exists(Paths.get(URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(uri)).toString()));
 			} catch (Exception e) {
 			}
 
@@ -56,7 +56,7 @@ public class Helper {
 		for (String uri : aleUris) {
 			boolean isPresent = false;
 			try {
-				isPresent = Files.exists(Paths.get(URI.createFileURI(Normalized.convertToFile(uri)).toString()));
+				isPresent = Files.exists(Paths.get(URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(uri)).toString()));
 			} catch (Exception e) {
 			}
 

@@ -13,8 +13,8 @@ import org.eclipse.acceleo.query.runtime.QueryParsing;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.ale.ALEInterpreter;
-import org.eclipse.emf.ecoretools.ale.OptimizedEvaluationResult;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.impl.AleInterpreter;
+import org.eclipse.emf.ecoretools.ale.core.interpreter.impl.OptimizedEvaluationResult;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.sirius.common.acceleo.aql.business.internal.AQLSiriusInterpreter;
 import org.eclipse.sirius.common.tools.api.interpreter.EvaluationException;
@@ -41,7 +41,7 @@ public class ALESiriusInterpreter extends AQLSiriusInterpreter {
 		Map<String, Object> variables = getVariables();
 		variables.put("self", target); //$NON-NLS-1$
 
-		ALEInterpreter aleInterpreter = engine.getInterpreter();
+		AleInterpreter aleInterpreter = engine.getInterpreter();
 		if (aleInterpreter != null) {
 			IQueryEnvironment queryEnv = aleInterpreter.getQueryEnvironment();
 			if (queryEnv != null) {
