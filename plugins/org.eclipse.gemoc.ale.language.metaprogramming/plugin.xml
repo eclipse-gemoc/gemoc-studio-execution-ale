@@ -4,8 +4,15 @@
    <extension
          point="org.eclipse.gemoc.gemoc_language_workbench.metaprog">
       <approach
-            name="ale"
+            dependencies="org.eclipse.gemoc.metaprog.ecore"
+            name="org.eclipse.gemoc.metaprog.ale"
             validator="org.eclipse.gemoc.ale.language.metaprogramming.AleRuleProvider">
+         <languageComponent
+               description="Entry used to define the ale file for the DSL"
+               name="ale"
+               optional="false"
+               validationRule="org.eclipse.gemoc.ale.language.metaprogramming.AleRule">
+         </languageComponent>
       </approach>
    </extension>
 
