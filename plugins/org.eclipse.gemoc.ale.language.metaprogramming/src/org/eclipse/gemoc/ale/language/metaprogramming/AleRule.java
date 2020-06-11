@@ -28,17 +28,6 @@ public class AleRule implements IRule{
 
 	@Override
 	public Message execute(Dsl dsl) {
-		
-		ArrayList<String> entriesNames = new ArrayList<String>();
-		
-		for (Entry e : dsl.getEntries()) {
-			entriesNames.add(e.getKey());
-		}
-		
-		if(!entriesNames.contains("ale")) {
-			return (new Message("Missing entry \"ale\"", Severity.ERROR));
-		}
-			
 		return (new Message("",Severity.DEFAULT));
 	}
 
