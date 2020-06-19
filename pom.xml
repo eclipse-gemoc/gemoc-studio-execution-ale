@@ -19,7 +19,7 @@
 <!-- 		<ale-repo.url>http://www.kermeta.org/ale-lang/updates/2019-11-13</ale-repo.url> -->
 		<ale-repo.url>https://ci.inria.fr/gemoc/job/ale-lang/job/bump-to-eclipse-2020-03/lastSuccessfulBuild/artifact/releng/org.eclipse.emf.ecoretools.ale.updatesite/target/repository/</ale-repo.url>
 		<k3-repo.url>http://www.kermeta.org/k3/update_2018-09-05</k3-repo.url>
-		<melange-repo.url>http://melange.inria.fr/updatesite/nightly/update_2020-05-20</melange-repo.url>
+		<melange-repo.url>http://melange.inria.fr/updatesite/nightly/update_2020-06-19</melange-repo.url>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse/gemoc-studio-execution-ale.git</tycho.scmUrl>
