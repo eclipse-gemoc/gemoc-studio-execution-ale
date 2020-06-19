@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.env.impl.PathsBasedAleEnvironment;
@@ -36,45 +39,55 @@ public class Helper {
 	 * Check language's Ecore & ALE URIs
 	 */
 	public static List<String> validate(org.eclipse.gemoc.dsl.Dsl language) {
-		List<String> errors = new ArrayList<>();
 
+		List<String> errors = new ArrayList<>();
+		
 		List<String> ecoreUris = getEcoreUris(language);
 		List<String> aleUris = getAleUris(language);
-
-		for (String uri : ecoreUris) {
-			boolean isPresent = false;
-			try {
-				isPresent = Files.exists(Paths.get(URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(uri)).toString()));
-			} catch (Exception e) {
-			}
-
-			if (!isPresent) {
+		
+		for(String uri : ecoreUris) {
+			if(!checkExistURI(uri)) {
 				errors.add("Can't find: " + uri + " (declared in the language '" + language.getName() + "'");
 			}
 		}
-
-		for (String uri : aleUris) {
-			boolean isPresent = false;
-			try {
-				isPresent = Files.exists(Paths.get(URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(uri)).toString()));
-			} catch (Exception e) {
-			}
-
-			if (!isPresent) {
+		
+		for(String uri : aleUris) {
+			if(!checkExistURI(uri)) {
 				errors.add("Can't find: " + uri + " (declared in the language '" + language.getName() + "'");
 			}
 		}
-
+		
 		return errors;
 	}
-
+	
+	public static boolean checkExistURI(String uriString) {
+		URI uri = URI.createURI(uriString);
+		IWorkspace ws = ResourcesPlugin.getWorkspace();
+		if(ws != null) {
+			IResource file = ws.getRoot().findMember(uri.toPlatformString(true));
+			if(file != null) {
+				return true;
+			}
+		}
+		boolean isPresent = false;
+		try {
+			isPresent = Files.exists(Paths.get(URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(uriString)).toString()));
+		}
+		catch(Exception e) {}
+		return isPresent;
+	}
+	
 	public static List<String> getEcoreUris(org.eclipse.gemoc.dsl.Dsl language) {
 		List<String> ecoreUris = new ArrayList<>();
-
-		Optional<Entry> ecoreEntry = language.getEntries().stream().filter(entry -> entry.getKey().equals("ecore"))
+		
+		Optional<Entry> ecoreEntry = 
+				language
+				.getEntries()
+				.stream()
+				.filter(entry -> entry.getKey().equals("ecore"))
 				.findFirst();
-
-		if (ecoreEntry.isPresent()) {
+		
+		if(ecoreEntry.isPresent()) {
 			String[] uris = ecoreEntry.get().getValue().split(",");
 			for (String uri : uris) {
 				ecoreUris.add(uri.trim());
@@ -82,7 +95,7 @@ public class Helper {
 		}
 		return ecoreUris;
 	}
-
+	
 	public static List<String> getAleUris(org.eclipse.gemoc.dsl.Dsl language) {
 		List<String> aleUris = new ArrayList<>();
 
