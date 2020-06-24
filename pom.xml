@@ -16,8 +16,7 @@
 		<xtend.version>2.21.0</xtend.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eclipse-repo.url>http://download.eclipse.org/releases/2020-03</eclipse-repo.url>
-		<ale.p2.url>http://www.kermeta.org/ale-lang/updates/2020-06-24</ale.p2.url>
-		<!-- <ale.p2.url>https://ci.inria.fr/gemoc/job/ale-lang/job/bump-to-eclipse-2020-03/lastSuccessfulBuild/artifact/releng/org.eclipse.emf.ecoretools.ale.updatesite/target/repository/</ale.p2.url>-->
+		<ale-repo.url>http://www.kermeta.org/ale-lang/updates/2020-06-24</ale-repo.url>
 		<k3-repo.url>http://www.kermeta.org/k3/update_2018-09-05</k3-repo.url>
 		<melange-repo.url>http://melange.inria.fr/updatesite/nightly/update_2020-06-19</melange-repo.url>
 		<maven.compiler.source>1.8</maven.compiler.source>
