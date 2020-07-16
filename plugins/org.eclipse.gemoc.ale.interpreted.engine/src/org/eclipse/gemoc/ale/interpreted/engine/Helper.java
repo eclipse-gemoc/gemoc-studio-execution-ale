@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.env.impl.PathsBasedAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.ide.env.WithAbsoluteBehaviorPathsAleEnvironment;
+import org.eclipse.emf.ecoretools.ale.core.parser.IOUtils;
 import org.eclipse.gemoc.dsl.Entry;
 
 public class Helper {
@@ -24,7 +25,7 @@ public class Helper {
 		List<String> aleUris = getAleUris(language);
 
 		List<String> ecoreFileUris = ecoreUris.stream()
-				.map(elem -> URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(elem)).toString()).collect(Collectors.toList());
+				.map(elem -> URI.createFileURI(IOUtils.convertToFile(elem)).toString()).collect(Collectors.toList());
 
 		WithAbsoluteBehaviorPathsAleEnvironment res = new WithAbsoluteBehaviorPathsAleEnvironment(new PathsBasedAleEnvironment(new ArrayList<String>(), new ArrayList<String>()));
 		try {
@@ -71,7 +72,8 @@ public class Helper {
 		}
 		boolean isPresent = false;
 		try {
-			isPresent = Files.exists(Paths.get(URI.createFileURI(WithAbsoluteBehaviorPathsAleEnvironment.convertToFile(uriString)).toString()));
+			isPresent = Files.exists(
+					Paths.get(java.net.URI.create(URI.createFileURI(IOUtils.convertToFile(uriString)).toString())));
 		}
 		catch(Exception e) {}
 		return isPresent;
