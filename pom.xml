@@ -10,42 +10,41 @@
 	<version>1.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-
+	<parent>
+		<groupId>org.eclipse.gemoc.gemoc-studio</groupId>
+		<artifactId>gemoc_studio-eclipse-bom</artifactId>
+		<version>3.3.0-SNAPSHOT</version>
+		<relativePath>../gemoc-studio/gemoc_studio/plugins/gemoc_studio-eclipse-bom</relativePath>
+	</parent>
+	
 	<properties>
-		<tycho.version>2.2.0</tycho.version>
-		<xtend.version>2.24.0</xtend.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eclipse-repo.url>http://download.eclipse.org/releases/2020-12</eclipse-repo.url>
-		<ale-repo.url>http://www.kermeta.org/ale-lang/updates/2020-11-09</ale-repo.url>
-		<k3-repo.url>http://www.kermeta.org/k3/update</k3-repo.url>
 		<melange-repo.url>http://melange.inria.fr/updatesite/nightly/update_2020-11-16</melange-repo.url>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse/gemoc-studio-execution-ale.git</tycho.scmUrl>
 		
-		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 
 	<repositories>
 		<repository>
 			<id>Eclipse release</id>
-			<url>${eclipse-repo.url}</url>
+			<url>${eclipse.release.p2.url}</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
 			<id>ale</id>
-			<url>${ale-repo.url}</url>
+			<url>${ale.p2.url}</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
             <id>K3</id>
             <layout>p2</layout>
-            <url>${k3-repo.url}</url>
+            <url>${k3.p2.url}</url>
         </repository>
         <repository>
             <id>Melange</id>
             <layout>p2</layout>
-            <url>${melange-repo.url}</url>
+            <url>${melange.p2.url}</url>
         </repository>
 
 		<!-- not required because the build is supposed to be launched from gemoc-studio/dev_support/full_compilation/pom.xml
@@ -87,12 +86,12 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
-				<version>${tycho.version}</version>
+				<version>${tycho-version}</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.eclipse.tycho.extras</groupId>
 						<artifactId>tycho-sourceref-jgit</artifactId>
-						<version>${tycho.version}</version>
+						<version>${tycho-version}</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -105,7 +104,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho.version}</version>
+				<version>${tycho-version}</version>
 				<executions>
 					<execution>
 						<id>plugin-source</id>
@@ -119,7 +118,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho.version}</version>
+				<version>${tycho-version}</version>
 				<executions>
 					<execution>
 						<id>source-feature</id>
@@ -135,7 +134,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
-				<version>${tycho.version}</version>
+				<version>${tycho-version}</version>
 				<executions>
 					<execution>
 						<id>attached-p2-metadata</id>
@@ -150,7 +149,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho.version}</version>
+				<version>${tycho-version}</version>
 				<configuration>
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
@@ -162,7 +161,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho.version}</version>
+				<version>${tycho-version}</version>
 				<configuration>
 					<dependency-resolution>
 						<extraRequirements>
