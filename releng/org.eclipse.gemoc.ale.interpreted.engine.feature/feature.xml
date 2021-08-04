@@ -3,7 +3,7 @@
       id="org.eclipse.gemoc.ale.interpreted.engine.feature"
       label="GEMOC ALE Engine"
       version="1.1.0.qualifier"
-      provider-name="Inria/Obeo">
+      provider-name="Eclipse GEMOC Project">
 
    <plugin
          id="org.eclipse.gemoc.ale.interpreted.engine"

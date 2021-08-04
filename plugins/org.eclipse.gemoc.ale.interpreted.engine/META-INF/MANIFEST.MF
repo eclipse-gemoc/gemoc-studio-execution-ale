@@ -26,3 +26,4 @@ Require-Bundle: fr.inria.diverse.melange.metamodel,
 Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.gemoc.ale.interpreted.engine
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: Eclipse GEMOC Project
