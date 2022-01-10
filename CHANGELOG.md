@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.4.0 (10/01/2022)
+
+#### Version upgrades
+
+- [**releng**][**bump**] Bump Studio to 3.4.0 [#50](https://github.com/eclipse/gemoc-studio-execution-ale/pull/50)
+
+---
+
 ## v3.3.0 (28/07/2021)
 
 #### Enhancements:
@@ -8,8 +16,8 @@
 
 #### Version upgrades
 
-- [**bump**] Bump eclipse 2020-12 [#46](https://github.com/eclipse/gemoc-studio-execution-ale/pull/46)
 - [**bump**] Bump to Eclipse 2021-06 [#49](https://github.com/eclipse/gemoc-studio-execution-ale/pull/49)
+- [**bump**] Bump eclipse 2020-12 [#46](https://github.com/eclipse/gemoc-studio-execution-ale/pull/46)
 - [**bump**] Bump to Eclipse 2020-03 [#43](https://github.com/eclipse/gemoc-studio-execution-ale/pull/43)
 
 #### Release Engineering
