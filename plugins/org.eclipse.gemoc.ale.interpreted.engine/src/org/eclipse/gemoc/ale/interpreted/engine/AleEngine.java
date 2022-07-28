@@ -83,7 +83,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 								EObject currentCaller = (EObject) arguments[0];
 								String className = currentCaller.eClass().getName();
 								String methodName = service.getName();
-								beforeExecutionStep(currentCaller, className, methodName);
+								beforeExecutionStep(currentCaller, className, methodName, Arrays.asList(arguments));
 							}
 						}
 					}
@@ -94,7 +94,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 					if(service instanceof EvalBodyService) {
 						boolean isStep = ((EvalBodyService)service).getImplem().getTags().contains("step");
 						if(isStep) {
-							afterExecutionStep();
+							afterExecutionStep(Optional.of(result));
 						}
 					}
 				}
