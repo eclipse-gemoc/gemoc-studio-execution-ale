@@ -83,7 +83,9 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 								EObject currentCaller = (EObject) arguments[0];
 								String className = currentCaller.eClass().getName();
 								String methodName = service.getName();
-								beforeExecutionStep(currentCaller, className, methodName, Arrays.asList(arguments));
+								List<Object> parameters = Lists.newArrayList(Arrays.asList(arguments));
+								parameters.remove(0);
+								beforeExecutionStep(currentCaller, className, methodName, parameters);
 							}
 						}
 					}
