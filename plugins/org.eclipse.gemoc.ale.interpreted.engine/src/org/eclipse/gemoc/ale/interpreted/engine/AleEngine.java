@@ -96,7 +96,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 					if(service instanceof EvalBodyService) {
 						boolean isStep = ((EvalBodyService)service).getImplem().getTags().contains("step");
 						if(isStep) {
-							afterExecutionStep();
+							afterExecutionStep(Optional.of(result));
 						}
 					}
 				}
