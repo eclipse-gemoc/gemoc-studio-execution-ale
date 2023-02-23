@@ -12,6 +12,7 @@ package org.eclipse.gemoc.ale.interpreted.engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +97,7 @@ public class AleEngine extends AbstractSequentialExecutionEngine<org.eclipse.gem
 					if(service instanceof EvalBodyService) {
 						boolean isStep = ((EvalBodyService)service).getImplem().getTags().contains("step");
 						if(isStep) {
-							afterExecutionStep(Optional.of(result));
+							afterExecutionStep(Collections.singletonList(result));
 						}
 					}
 				}
