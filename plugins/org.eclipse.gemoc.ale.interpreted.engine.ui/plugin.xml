@@ -26,4 +26,41 @@
             id="org.eclipse.gemoc.ale.interpreted.engine.ui.launcher.launchConfigurationTypeImage">
       </launchConfigurationTypeImage>
    </extension>
+   	<extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.eclipse.gemoc.ale.interpreted.engine.ui.launcher.Launcher"
+            description="Create a configuration to launch an Eclipse application in debug mode."
+            icon="icons/IconeGemocModel-16.png"
+            id="org.eclipse.gemoc.execution.sequential.javaengine.ui.GemocExecutableReflectiveModel"
+            label="Gemoc ALE Sequential eXecutable Model"
+            modes="run, debug">
+         <configurationType
+               id="org.eclipse.gemoc.ale.interpreted.engine.ui.launcher">
+         </configurationType>
+         <contextualLaunch>
+            <enablement>
+            	<with variable="selection">
+		     		<count value="1"/>
+	      			<iterate>
+	       				<or>
+	        				<test property="org.eclipse.gemoc.executionframework.engine.ui.propertytesters.isExecutableDomainSpecificModel"/>
+	        				<test property="org.eclipse.debug.ui.matchesPattern"
+	                        	value="*.xmi">
+	                     	</test>
+	        			</or>
+	      			</iterate>
+		     </with>
+            </enablement>
+            <contextLabel
+                  label="Gemoc ALE Sequential eXecutable Model"
+                  mode="run">
+            </contextLabel>
+            <contextLabel
+                  label="Gemoc ALE Sequential eXecutable Model"
+                  mode="debug">
+            </contextLabel>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
 </plugin>
